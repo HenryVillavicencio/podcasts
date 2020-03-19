@@ -1,15 +1,16 @@
-import fetch from "isomorphic-unfetch";
-
+import Link from "next/link";
 const page = ({ channels }) => {
   return (
     <div>
       <header>Podcasts</header>
       <div className="channels">
         {channels.map((channel, key) => (
-          <div key={key} className="channel">
-            <img src={channel.urls.logo_image.original} />
-            <h2>{channel.title}</h2>
-          </div>
+          <Link key={key} href={`/channel?id=${channel.id}`}>
+            <a className="channel">
+              <img src={channel.urls.logo_image.original} />
+              <h2>{channel.title}</h2>
+            </a>
+          </Link>
         ))}
       </div>
 
@@ -31,6 +32,8 @@ const page = ({ channels }) => {
           border-radius: 3px;
           box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
           margin-bottom: 0.5em;
+          text-decoration: none;
+          color: black;
         }
         .channel img {
           width: 100%;
