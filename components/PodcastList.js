@@ -1,11 +1,21 @@
-import Link from "next/link";
+import { Link } from "../routes";
 import moment from "moment";
+import slug from "../helpers/slug";
 
 export default ({ audioClips }) => {
   return (
     <>
       {audioClips.map((clip, key) => (
-        <Link href={`/podcast?id=${clip.id}`} key={key}>
+        <Link
+          route="podcast"
+          params={{
+            slugChannel: slug(clip.channel.title),
+            idChannel: slug(clip.channel.id.toString()),
+            slug: slug(clip.title),
+            id: slug(clip.id.toString())
+          }}
+          key={key}
+        >
           <a className="podcast">
             <h3>{clip.title}</h3>
             <span>{moment(clip.uploaded_at).fromNow()}</span>

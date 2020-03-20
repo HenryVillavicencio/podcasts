@@ -9,7 +9,6 @@ const channel = props => {
   if (statusCode !== 200) {
     return <Error statusCode={statusCode} />;
   }
-
   return (
     <Layout title={channel.title}>
       <div
@@ -18,6 +17,7 @@ const channel = props => {
           backgroundImage: `url(${channel.urls.banner_image.original})`
         }}
       />
+
       <h1>{channel.title}</h1>
       <ChannelGrid channels={series} />
       <h2>Últimos Podcasts</h2>
@@ -39,6 +39,14 @@ const channel = props => {
           font-weight: 600;
           margin: 0;
           text-align: center;
+        }
+        .modal {
+          position: fixed;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          left: 0;
+          z-index: 99999;
         }
       `}</style>
     </Layout>
