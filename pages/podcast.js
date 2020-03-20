@@ -1,9 +1,10 @@
 import Link from "next/link";
+import Layout from "../components/Layout";
 
 const podcast = props => {
   const { clip } = props;
   return (
-    <div>
+    <Layout title={clip.title} header={false}>
       <div className="modal">
         <nav>
           <Link href={`/channel?id=${clip.channel.id}`}>
@@ -35,7 +36,6 @@ const podcast = props => {
           flex-direction: column;
           color: white;
         }
-
         nav a {
           display: block;
           color: white;
@@ -68,15 +68,7 @@ const podcast = props => {
           margin: 1em 0;
         }
       `}</style>
-
-      <style jsx global>{`
-        body {
-          margin: 0;
-          background: white;
-          font-family: system-ui;
-        }
-      `}</style>
-    </div>
+    </Layout>
   );
 };
 
