@@ -4,7 +4,8 @@
 
 App de audiopodcast desarrollado con Next.JS e integrada con el API de AudioBoom.
 
-![captura de la app](./.readme-static/podcast-app.gif)
+![captura de la app](app.gif)
+
 [Demo](https://podcasts-beta.now.sh/)
 
 ## ¿Cómo funciona?
