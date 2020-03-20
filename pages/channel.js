@@ -1,16 +1,14 @@
 import Layout from "../components/Layout";
 import ChannelGrid from "../components/ChannelGrid";
 import PodcastList from "../components/PodcastList";
-const channel = props => {
-  const { channel, audioClips, series } = props;
+import Error from "next/error";
 
-  // return(
-  //   <Layout title='Postcast' >
-  //     <Banner></Banner>
-  //     <ChannelGrid></ChannelGrid>
-  //     <PodcastList></ListPodcast>
-  //   </Layout>
-  // )
+const channel = props => {
+  const { channel, audioClips, series, statusCode } = props;
+
+  if (statusCode !== 200) {
+    return <Error statusCode={statusCode} />;
+  }
 
   return (
     <Layout title={channel.title}>
@@ -47,24 +45,39 @@ const channel = props => {
   );
 };
 
-channel.getInitialProps = async ({ query }) => {
+channel.getInitialProps = async ({ query, res }) => {
   let idChannel = query.id;
 
-  let [reqChannel, reqAudio, reqSeries] = await Promise.all([
-    fetch(`https://api.audioboom.com/channels/${idChannel}`),
-    fetch(`https://api.audioboom.com/channels/${idChannel}/audio_clips`),
-    fetch(`https://api.audioboom.com/channels/${idChannel}/child_channels`)
-  ]);
+  try {
+    let [reqChannel, reqAudio, reqSeries] = await Promise.all([
+      fetch(`https://api.audioboom.com/channels/${idChannel}`),
+      fetch(`https://api.audioboom.com/channels/${idChannel}/audio_clips`),
+      fetch(`https://api.audioboom.com/channels/${idChannel}/child_channels`)
+    ]);
 
-  let dataChannel = await reqChannel.json();
-  let channel = dataChannel.body.channel;
+    if (reqChannel.status >= 400) {
+      res.statusCode = reqChannel.status;
+      return {
+        channel: null,
+        audioClips: null,
+        series: null,
+        statusCode: reqChannel.status
+      };
+    }
 
-  let dataAudios = await reqAudio.json();
-  let audioClips = dataAudios.body.audio_clips;
+    let dataChannel = await reqChannel.json();
+    let channel = dataChannel.body.channel;
 
-  let dataSeries = await reqSeries.json();
-  let series = dataSeries.body.channels;
+    let dataAudios = await reqAudio.json();
+    let audioClips = dataAudios.body.audio_clips;
 
-  return { channel, audioClips, series };
+    let dataSeries = await reqSeries.json();
+    let series = dataSeries.body.channels;
+
+    return { channel, audioClips, series, statusCode: 200 };
+  } catch (e) {
+    res.statusCode = 503;
+    return { channel: null, audioClips: null, series: null, statusCode: 503 };
+  }
 };
 export default channel;
