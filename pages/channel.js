@@ -27,7 +27,7 @@ const channel = props => {
           padding-bottom: 25%;
           background-position: center;
           background-size: cover;
-          background-color: #aaa;
+          background-color: black;
         }
         h1 {
           font-weight: 600;
@@ -39,14 +39,6 @@ const channel = props => {
           font-weight: 600;
           margin: 0;
           text-align: center;
-        }
-        .modal {
-          position: fixed;
-          top: 0;
-          bottom: 0;
-          right: 0;
-          left: 0;
-          z-index: 99999;
         }
       `}</style>
     </Layout>

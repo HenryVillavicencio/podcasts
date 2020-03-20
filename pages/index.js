@@ -8,7 +8,7 @@ const page = ({ channels, statusCode }) => {
     return <Error statusCode={statusCode} />;
   }
   return (
-    <Layout title="Podcast2">
+    <Layout title="Podcast">
       <ChannelGrid channels={channels} />
     </Layout>
   );
