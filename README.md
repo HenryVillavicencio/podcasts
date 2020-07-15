@@ -1,21 +1,21 @@
-# App de podcats
+# Podcats App | PWA | NextJs | AudioBoom API
 
 ---
 
-App de audiopodcast desarrollado con Next.JS e integrada con el API de AudioBoom.
+Progressive Web App develop with Next.JS and AudioBoom API.
 
 ![captura de la app](app.gif)
 
 [Demo](https://podcasts-beta.now.sh/)
 
-## ¿Cómo funciona?
+## How does it work?
 
 Require Node.JS 10
 
-- `yarn install || npm install` para instalar las depencias.
-- `yarn run dev || npm run dev` para el entorno de desarrollo.
-- `yarn run build && yarn start || npm run build && npm start` para el entorno de producción.
+- `yarn install || npm install` install dependencies.
+- `yarn run dev || npm run dev` run app in development enviroment.
+- `yarn run build && yarn start || npm run build && npm start` compile and run app to production.
 
-## Licencia
+## License
 
 MIT
